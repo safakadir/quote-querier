@@ -2,6 +2,7 @@ import express from 'express'
 import { query } from './query.js'
 import { getHoursConfig } from './config.js'
 import dotenv from 'dotenv'
+import { sendEmail } from './email.js'
 
 dotenv.config()
 
@@ -19,8 +20,9 @@ app.get('/query', async (req, res) => {
   res.json(result)
 })
 
-app.get('/email', async (req, res) => {
-  throw new Error("Not implemented")
+app.post('/email', async (req, res) => {
+  await sendEmail("safakadir@gmail.com", "Test", req.body)
+  res.status(200).send('OK')
 })
 
 const port = process.env.PORT || 3000
