@@ -16,7 +16,7 @@ export async function query(hours) {
   for (let f of FACILITIES) {
     const subResult = await queryFacility(f.id, hours)
     if (subResult.length == 0) continue
-    result.push({name: f.name, seances: subResult.map(s => s.quotaName)})
+    result.push({name: f.name, seances: subResult.map(s => ({seans: s.quotaName, kalan: s.remainingQuota}))})
   }
   return result
 }
