@@ -21,8 +21,16 @@ app.get('/query', async (req, res) => {
 })
 
 app.post('/email', async (req, res) => {
-  await sendEmail("safakadir@gmail.com", req.body.subject, req.body.text)
+  await sendEmail(req.body.to, req.body.subject, req.body.text)
   res.status(200).send('OK')
+})
+
+app.get('/checkAndInform', async (req, res) => {
+  const result = await query(hours)
+  if (result.length > 0) {
+    await sendEmail("safakadir@gmail.com", "Spor Aş Kayseri - YENİ SLOT", JSON.stringify(result, null, 2))
+  }
+  res.status(200).send({length: result.length})
 })
 
 const port = process.env.PORT || 3000

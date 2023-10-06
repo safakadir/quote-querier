@@ -12,11 +12,11 @@ const HAVUZ_GROUP_ID = 1
 const FULL_GROUP_ID = 5
 
 export async function query(hours) {
-  const result = {}
+  const result = []
   for (let f of FACILITIES) {
     const subResult = await queryFacility(f.id, hours)
     if (subResult.length == 0) continue
-    result[f.id] = {...f, seances: subResult}
+    result.push({...f, seances: subResult})
   }
   return result
 }
