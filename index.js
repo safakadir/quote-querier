@@ -21,7 +21,7 @@ app.get('/query', async (req, res) => {
 })
 
 app.post('/email', async (req, res) => {
-  await sendEmail("safakadir@gmail.com", "Test", req.body)
+  await sendEmail("safakadir@gmail.com", req.body.subject, req.body.text)
   res.status(200).send('OK')
 })
 
