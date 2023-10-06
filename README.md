@@ -1,9 +1,7 @@
-# starter-micro-api
+# Quote Querier
 
-This is the simplest possible nodejs api using the base http library that responds to any request with: 
-```
-Yo!
-```
+This is a simple app to inquery quotes from a provider.
+It's scheduled daily with a cron and it will send emails if finds any open position.
 
 ## Deploy in under 10 seconds
 
