@@ -15,7 +15,6 @@ app.get('/', (req, res) => {
 
 app.get('/query', async (req, res) => {
   const hours = getHoursConfig()
-  console.log('Querying with hours', hours)
   const result = await query(hours)
   res.json(result)
 })
@@ -26,6 +25,7 @@ app.post('/email', async (req, res) => {
 })
 
 app.get('/checkAndInform', async (req, res) => {
+  const hours = getHoursConfig()
   const result = await query(hours)
   if (result.length > 0) {
     await sendEmail("safakadir@gmail.com", "Spor Aş Kayseri - YENİ SLOT", JSON.stringify(result, null, 2))
