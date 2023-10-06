@@ -30,6 +30,9 @@ app.get('/checkAndInform', async (req, res) => {
   if (result.length > 0) {
     await sendEmail("safakadir@gmail.com", "Spor Aş Kayseri - YENİ SLOT", JSON.stringify(result, null, 2))
   }
+  else {
+    await sendEmail("safakadir@gmail.com", "Spor Aş Kayseri - Slot Yok", "Maalesef istediğiniz saatlerde boş slot henüz yok.")
+  }
   res.status(200).send({length: result.length})
 })
 
