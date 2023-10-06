@@ -1,6 +1,6 @@
 import express from 'express'
 import { query } from './query.js'
-import { getHours } from './config.js'
+import { getHoursConfig } from './config.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/query', async (req, res) => {
-  const hours = getHours()
+  const hours = getHoursConfig()
   console.log('Querying with hours', hours)
   const result = await query(hours)
   res.json(result)

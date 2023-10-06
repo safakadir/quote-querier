@@ -1,4 +1,4 @@
-export function getHours() {
+export function getHoursConfig() {
   if (!!process.env.HOURS) {
     return process.env.HOURS.split(",").map(h => parseInt(h))
   }
