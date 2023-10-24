@@ -1,6 +1,7 @@
 import express from 'express'
-import { query } from './query.js'
-import { getHoursConfig } from './config.js'
+import { query as sporasQuery } from './sporas/query.js'
+import { query as tekdenQuery } from './tekden/query.js'
+import { getHoursConfig } from './sporas/config.js'
 import dotenv from 'dotenv'
 import { sendEmail } from './email.js'
 
@@ -13,9 +14,14 @@ app.get('/', (req, res) => {
   res.send('YO!')
 })
 
-app.get('/query', async (req, res) => {
+app.get('/query/sporas', async (req, res) => {
   const hours = getHoursConfig()
-  const result = await query(hours)
+  const result = await sporasQuery(hours)
+  res.json(result)
+})
+
+app.get('/query/tekden', async (req, res) => {
+  const result = await tekdenQuery(6)
   res.json(result)
 })
 
@@ -24,14 +30,22 @@ app.post('/email', async (req, res) => {
   res.status(200).send('OK')
 })
 
-app.get('/checkAndInform', async (req, res) => {
+app.get('/checkAndInform/sporas', async (req, res) => {
   const hours = getHoursConfig()
-  const result = await query(hours)
+  const result = await sporasQuery(hours)
   if (result.length > 0) {
     await sendEmail("safakadir@gmail.com", "Spor Aş Kayseri - YENİ SLOT", JSON.stringify(result, null, 2))
   }
   else if (process.env.SEND_NORESULTS === "true") {
     await sendEmail("safakadir@gmail.com", "Spor Aş Kayseri - Slot Yok", "Maalesef istediğiniz saatlerde boş slot henüz yok.")
+  }
+  res.status(200).send({length: result.length})
+})
+
+app.get('/checkAndInform/tekden', async (req, res) => {
+  const result = await tekdenQuery(3)
+  if (result.length > 0) {
+    await sendEmail("safakadir@gmail.com", "Tekden Kayseri Hastanesi - YENİ SLOT", JSON.stringify(result, null, 2))
   }
   res.status(200).send({length: result.length})
 })

@@ -5,7 +5,7 @@ export async function sendEmail(to, subject, text) {
     service: 'gmail',
     auth: {
       type: 'OAuth2',
-      user: 'safakadir@gmail.com',
+      user: process.env.MAIL_ADDRESS,
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       refreshToken: process.env.REFRESH_TOKEN
