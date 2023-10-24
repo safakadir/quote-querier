@@ -12,7 +12,7 @@ export async function query(days) {
   for (let i = 1; i <= days; i++) {
     const dayMoment = moment().add(i, 'days')
     if (dayMoment.day() == 0) {
-      i--
+      days++
       continue // skip sunday
     }
     const dayStr = dayMoment.format("DD.MM.YYYY")
