@@ -19,7 +19,6 @@ export async function query(days) {
     const url = `${URL}?dr_id=${doctorId}&dept_id=${departmentId}&day=${dayStr}`
     const { data } = await axios.get(url)
     const subResult = data.Rows.slice(1)
-    console.log(subResult)
     if (subResult[0].day.includes("Dolu")) continue
     for (let slot of subResult) {
       result.push({day: dayStr, time: slot.time})
