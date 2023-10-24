@@ -12,7 +12,7 @@ It's scheduled daily with a cron and it will send emails if finds any open posit
 ## Refresh token
 
 - https://developers.google.com/oauthplayground
-- At top left gear icon, set CLIENT_ID and CLIENT_SECRET
+- At top left gear icon, set CLIENT_ID and CLIENT_SECRET (tick "Use your own credentials")
 - Select Gmail API v1 https://mail.google.com/
 - Authorize
 - Exchange authorization code for tokens
