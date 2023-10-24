@@ -43,7 +43,7 @@ app.get('/checkAndInform/sporas', async (req, res) => {
 })
 
 app.get('/checkAndInform/tekden', async (req, res) => {
-  const result = await tekdenQuery(3)
+  const result = await tekdenQuery(process.env.TEKDEN_SHORT_DAYS || 3)
   if (result.length > 0) {
     await sendEmail("safakadir@gmail.com", "Tekden Kayseri Hastanesi - YENİ SLOT", JSON.stringify(result, null, 2))
   }
